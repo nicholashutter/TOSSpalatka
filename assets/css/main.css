@@ -119,7 +119,7 @@ ol,
 ul {
 	list-style: none;
 	text-align: center;
-	font-size:1.25em; 
+	font-size: 1.25em;
 
 }
 
@@ -244,7 +244,7 @@ h5,
 h6 {
 	color: #393E46;
 	line-height: 1em;
-	
+
 	text-align: center;
 	padding-top: 1rem;
 	padding-bottom: 1rem;
@@ -391,9 +391,9 @@ pre code {
 
 /* Custom Classes / Rules Main */
 
-.bodyContent{
+.bodyContent {
 	margin: 1em .25em 1em .25em;
-	padding: 0em .25em 0em .25em; 
+	padding: 0em .25em 0em .25em;
 }
 
 .partialBorderWrapper {
@@ -416,27 +416,38 @@ pre code {
 	width: 10rem;
 }
 
-.TOSS{
-	margin:0; 
-	padding:0; 
+.TOSS {
+	margin: 0;
+	padding: 0;
 }
 
-.wrapQRCode{
-	display:flex;
+.wrapQRCode {
+	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin: 1.5em .25em 3em .25em; 
-	padding: .25em .25em .25em .25em; 
-	text-align:center; 
+	margin: 1.5em .25em 3em .25em;
+	padding: .25em .25em .25em .25em;
+	text-align: center;
 }
-	
-.contactFormInputs{
-	background:none !important; 
+
+.contactFormInputs {
+	background: none !important;
 	background-color: white !important;
 }
 
-#TOSS{
+.subHeading {
+	padding-bottom: 1em;
+	margin-bottom: 1.5em;
+}
+
+#headerSubHeading {
+	margin: 1em;
+	padding: 0;
+	line-height: 0;
+}
+
+#TOSS {
 	font-size: 3em;
 }
 
@@ -461,9 +472,9 @@ pre code {
 	background-blend-mode: soft-light;
 }
 
-.flexRowsListItems{
-	margin-left: 1em; 
-	margin-right: 1em; 
+.flexRowsListItems {
+	margin-left: 1em;
+	margin-right: 1em;
 }
 
 @media screen and (max-width: 980px) {
@@ -2612,7 +2623,7 @@ ul {
 
 ul li {
 	margin-bottom:.5rem; 
-} */ 
+} */
 
 ul.alt {
 	list-style: none;
@@ -3118,7 +3129,7 @@ button:disabled,
 /* Header */
 
 #header {
-	padding: 9em 0 9em 0;
+	padding: 6em 0 9em 0;
 	background-color: #4686a0;
 	color: rgba(255, 255, 255, 0.75);
 	background-attachment: fixed, fixed, fixed;
@@ -3419,10 +3430,11 @@ body.is-preload #header .inner .actions {
 
 /* Global Custom Styles  */
 
-.resourcesPageH1{
-	margin: 1em 0em 1em 0em; 
-	padding: .5em 0em .5em 0em; 
+.resourcesPageH1 {
+	margin: 1em 0em 1em 0em;
+	padding: .5em 0em .5em 0em;
 }
+
 .contactForm {
 	display: flex;
 	flex-direction: column;
@@ -3583,17 +3595,17 @@ body.is-preload #header .inner .actions {
 		justify-content: left;
 	}
 
-	.flexRowsListItems{
-		margin-left:0;
-		margin-right:0; 
+	.flexRowsListItems {
+		margin-left: 0;
+		margin-right: 0;
 	}
 
 	.partialBorderWrapper {
 		align-items: first baseline;
 	}
 
-	.topLevelMenu{
-		margin:0;  
+	.topLevelMenu {
+		margin: 0;
 	}
 
 	p {
