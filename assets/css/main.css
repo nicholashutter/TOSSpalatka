@@ -392,8 +392,8 @@ pre code {
 /* Custom Classes / Rules Main */
 
 .bodyContent {
-	margin: 1em .25em 1em .25em;
-	padding: 0em .25em 0em .25em;
+	margin: 1em .25em 1.5em .25em;
+	padding: 0em .25em 1.5em .25em;
 }
 
 .partialBorderWrapper {
@@ -444,7 +444,7 @@ pre code {
 #headerSubHeading {
 	margin: 1em;
 	padding: 0;
-	line-height: 0;
+
 }
 
 #TOSS {
@@ -471,6 +471,8 @@ pre code {
 	background-image: url("images/overlay1.png"), url("../../images/sectionEightBackground.jpg");
 	background-blend-mode: soft-light;
 }
+
+
 
 .flexRowsListItems {
 	margin-left: 1em;
@@ -3545,7 +3547,9 @@ body.is-preload #header .inner .actions {
 
 	/* List */
 
-
+	.paypalLink{
+		margin-bottom:4em; 
+	}
 
 	ul.major-icons li {
 		padding: 2em;
