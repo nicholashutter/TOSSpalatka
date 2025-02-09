@@ -11,7 +11,7 @@
 <html>
 
 <head>
-	<title>One Time Safe Space</title>
+	<title>Temporary Overnight Safe Space</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -102,7 +102,7 @@
 						Life,</i> a nearby resource ready to serve you with care and dignity
 					from 11:30 AM to 12:30PM, Monday through Friday.</p>
 				<p class="bodyContent">Access <strong>clean</strong> and <strong>private</strong> shower facilities to
-					refresh and recharge Monday afternoons and Thursday evenings.
+					refresh and recharge Monday 7:00pm to 9:00pm and Thursday 2:00pm to 4:00pm.
 					We provide towels and essential
 					toiletries so you can feel comfortable and cared for.</p>
 				<p class="bodyContent">Your <strong>health</strong> and <strong>well-being </strong><i>matter.</i> We
@@ -113,6 +113,8 @@
 				<p class="bodyContent">We connect you with local resources, job training, and employment opportunities
 					to help
 					you take the <strong>next step</strong> toward independence.</p>
+				<p class="bodyContent">Relax with us and enjoy a movie with us. Screened on Thursdays from 5:00pm to
+					7:00pm.</p>
 				<!--	<ul class="actions special">
 					<li><a href="#five" class="button scrolly">See More Resources</a></li>
 				</ul> -->
@@ -147,6 +149,21 @@
 				</div>
 				<h2 class="subHeading">Click any button below to donate and keep a person in need warm tonight.</h2>
 
+				<script>
+					(function ()
+					{
+						if (window.location.protocol === 'http:')
+						{
+							console.warn("This site is being accessed over HTTP. Some features may not work correctly. Please use HTTPS.");
+
+							// Optionally, display a small, non-obtrusive message on the page:
+							const warningElement = document.createElement('div');
+							warningElement.style.cssText = 'position: fixed; top: 10px; left: 10px; background-color: yellow; padding: 10px; border: 1px solid orange; z-index: 9999;'; // Style as needed
+							warningElement.textContent = "This site is being accessed over HTTP. Some features may not work correctly. Please use HTTPS.";
+							document.body.appendChild(warningElement);
+						}
+					})(); 
+				</script>
 				<script>function abConfigure(c) { window.actblueConfig = c }</script>
 				<script src="https://secure.actblue.com/cf/assets/actblue.js" async
 					data-ab-source="snippet-20250118"></script>
@@ -167,9 +184,8 @@
 					Reach out today and become part of our incredible volunteer team. Together, we can make a
 					difference. </p>
 			</header>
-			<form class="contactForm"
-				action="mailto:putnamcountycaringcommission@gmail.com?subject=I want to get involved" method="post"
-				enctype="text/plain">
+			<form class="contactForm" action="mailto:info@safesleepalatka.org?subject=I want to get involved"
+				method="post" enctype="text/plain">
 				<input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
 				<input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
 				<input type="text" name="phone" placeholder="Your Phone Number" id="phoneNumber"
@@ -186,9 +202,10 @@
 			</div>
 			<h3>Or visit the link directly by clicking below.</h3>
 			<div class="paypalLink">
-				<a id="paypalLink" href="https://www.paypal.com/donate/?hosted_button_id=VQ3VL9H26XYU8">Visit Us on Paypal</a>
+				<a id="paypalLink" href="https://www.paypal.com/donate/?hosted_button_id=VQ3VL9H26XYU8">Visit Us on
+					Paypal</a>
 			</div>
-			
+
 	</section>
 
 	<script>
@@ -299,6 +316,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+
 
 </body>
 
