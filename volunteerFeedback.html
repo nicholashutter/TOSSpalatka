@@ -57,75 +57,71 @@
 </form>
 
 <script>
-	document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-	    event.preventDefault(); // Prevent default form submission
-	
-	    const form = event.target;
-	    const formData = new FormData(form);
-	
-	    // Validation functions
-	    function isValidEmail(email) {
-	        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-	        return emailRegex.test(email);
-	    }
-	
-	    function isValidPhoneNumber(phone) {
-	        const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-	        return phoneRegex.test(phone);
-	    }
-	
-	    // Sanitize function
-	    function sanitize(value) {
-	        if (typeof value === 'string') {
-	            return value.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Basic XSS protection
-	        }
-	        return value;
-	    }
-	
-	    // Get and validate form data
-	    const name = sanitize(formData.get("name"));
-	    const email = sanitize(formData.get("email"));
-	    const phone = sanitize(formData.get("phone"));
-	    const comment = sanitize(formData.get("comment"));
-	
-	    if (!isValidEmail(email)) {
-	        alert("Please enter a valid email address.");
-	        return;
-	    }
-	
-	    if (!isValidPhoneNumber(phone)) {
-	        alert("Please enter a valid phone number.");
-	        return;
-	    }
-	
-	    const data = {
-	        data: [
-	            name,
-	            email,
-	            phone,
-	            comment,
-	            "", // Add empty strings to make the length 6.
-	            ""
-	        ]
-	    };
-	
-	    fetch("https://script.google.com/macros/s/AKfycbzVb6_Qp6PZgBHaSamSMQn2mjcEe_JwkSpAdelW2N3q8qphzDDqGasoDp9isQ_UztvQZA/exec", {
-	        method: "POST",
-	        headers: {
-	            "Content-Type": "application/json"
-	        },
-	        body: JSON.stringify(data)
-	    })
-	    .then(response => response.json())
-	    .then(result => {
-	        console.log(result);
-	        // Handle the response from Apps Script (e.g., display a message)
-	    })
-	    .catch(error => {
-	        console.error("Error:", error);
-	        // Handle errors (e.g., display an error message)
-	    });
-	});
+    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        // Validation functions
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhoneNumber(phone) {
+            const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+            return phoneRegex.test(phone);
+        }
+
+        // Sanitize function
+        function sanitize(value) {
+            if (typeof value === 'string') {
+                return value.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Basic XSS protection
+            }
+            return value;
+        }
+
+        // Get and validate form data
+        const name = sanitize(formData.get("name"));
+        const email = sanitize(formData.get("email"));
+        const phone = sanitize(formData.get("phone"));
+        const comment = sanitize(formData.get("comment"));
+
+        if (!isValidEmail(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        if (!isValidPhoneNumber(phone)) {
+            alert("Please enter a valid phone number.");
+            return;
+        }
+
+        // Create the URL-encoded form data
+        const urlEncodedData = new URLSearchParams();
+        urlEncodedData.append("name", name);
+        urlEncodedData.append("email", email);
+        urlEncodedData.append("phone", phone);
+        urlEncodedData.append("comment", comment);
+
+        fetch("https://script.google.com/macros/s/AKfycbzVb6_Qp6PZgBHaSamSMQn2mjcEe_JwkSpAdelW2N3q8qphzDDqGasoDp9isQ_UztvQZA/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded" // Important!
+            },
+            body: urlEncodedData.toString()
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            // Handle the response from Apps Script (e.g., display a message)
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            // Handle errors (e.g., display an error message)
+        });
+    });
 </script>
 		</div>
 	</section>
