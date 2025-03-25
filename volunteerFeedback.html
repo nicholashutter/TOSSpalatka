@@ -48,52 +48,85 @@
 			<div class="partialBorderWrapper">
 				<p class="partialBorderDark"></p>
 			</div>
-			<form class="contactForm" id="feedbackForm"
-				method="post" enctype="text/plain">
-				<input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
-				<input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
-				<input type="text" name="phone" placeholder="Your Phone Number" id="phoneNumber"
-					class="contactFormInputs">
-				<input type="text" name="comment" placeholder="Your Feedback Here" id="comment"
-					class="contactFormInputs">
-				<input type="submit" value="Submit" id="contactForm">
-			</form>
+			<form class="contactForm" id="feedbackForm" method="post" enctype="text/plain">
+    <input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
+    <input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
+    <input type="text" name="phone" placeholder="Your Phone Number" id="phoneNumber" class="contactFormInputs">
+    <input type="text" name="comment" placeholder="Your Feedback Here" id="comment" class="contactFormInputs">
+    <input type="submit" value="Submit" id="contactForm">
+</form>
 
-			<script>
-				  document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-				    event.preventDefault(); // Prevent default form submission
-				
-				    const form = event.target;
-				    const formData = new FormData(form);
-				    const data = {
-				      data: [
-				        formData.get("name"),
-				        formData.get("email"),
-				        formData.get("phone"),
-				        formData.get("comment"),
-				        "",//add empty strings to make the length 6.
-				        ""
-				      ]
-				    };
-				
-				    fetch("https://script.google.com/macros/s/AKfycbx76Wba8Cumec82_Lwh-NCO4t8Vhfu5IBVfojIg2y0LzAkiBZM8fMi48Zjnp6wkvhwr-g/exec", {
-				      method: "POST",
-				      headers: {
-				        "Content-Type": "application/json"
-				      },
-				      body: JSON.stringify(data)
-				    })
-				    .then(response => response.json())
-				    .then(result => {
-				      console.log(result);
-				      // Handle the response from Apps Script (e.g., display a message)
-				    })
-				    .catch(error => {
-				      console.error("Error:", error);
-				      // Handle errors (e.g., display an error message)
-				    });
-				  });
-			</script>
+<script>
+	document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+	    event.preventDefault(); // Prevent default form submission
+	
+	    const form = event.target;
+	    const formData = new FormData(form);
+	
+	    // Validation functions
+	    function isValidEmail(email) {
+	        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	        return emailRegex.test(email);
+	    }
+	
+	    function isValidPhoneNumber(phone) {
+	        const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+	        return phoneRegex.test(phone);
+	    }
+	
+	    // Sanitize function
+	    function sanitize(value) {
+	        if (typeof value === 'string') {
+	            return value.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Basic XSS protection
+	        }
+	        return value;
+	    }
+	
+	    // Get and validate form data
+	    const name = sanitize(formData.get("name"));
+	    const email = sanitize(formData.get("email"));
+	    const phone = sanitize(formData.get("phone"));
+	    const comment = sanitize(formData.get("comment"));
+	
+	    if (!isValidEmail(email)) {
+	        alert("Please enter a valid email address.");
+	        return;
+	    }
+	
+	    if (!isValidPhoneNumber(phone)) {
+	        alert("Please enter a valid phone number.");
+	        return;
+	    }
+	
+	    const data = {
+	        data: [
+	            name,
+	            email,
+	            phone,
+	            comment,
+	            "", // Add empty strings to make the length 6.
+	            ""
+	        ]
+	    };
+	
+	    fetch("https://script.google.com/macros/s/AKfycbzZSWQSPqt6Ag2CBqyAsIlUNse53Nq5PXoPperlJnoXJ79ktBUO5pxd64wvzlGO1LouJg/exec", {
+	        method: "POST",
+	        headers: {
+	            "Content-Type": "application/json"
+	        },
+	        body: JSON.stringify(data)
+	    })
+	    .then(response => response.json())
+	    .then(result => {
+	        console.log(result);
+	        // Handle the response from Apps Script (e.g., display a message)
+	    })
+	    .catch(error => {
+	        console.error("Error:", error);
+	        // Handle errors (e.g., display an error message)
+	    });
+	});
+</script>
 		</div>
 	</section>
 
