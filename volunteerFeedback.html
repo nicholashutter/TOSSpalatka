@@ -48,8 +48,7 @@
 			<div class="partialBorderWrapper">
 				<p class="partialBorderDark"></p>
 			</div>
-			<form class="contactForm"
-				action="https://script.google.com/macros/s/AKfycbxYnOY8nV5N86kR8iWJItqXeZhcgULzY8L8H9wXQCkNoY-RVrZg088PBKaYEHv9ZKwAog/exec"
+			<form class="contactForm" id="feedbackForm"
 				method="post" enctype="text/plain">
 				<input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
 				<input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
@@ -59,6 +58,42 @@
 					class="contactFormInputs">
 				<input type="submit" value="Submit" id="contactForm">
 			</form>
+
+			<script>
+				  document.getElementById("feedbackForm").addEventListener("submit", function(event) {
+				    event.preventDefault(); // Prevent default form submission
+				
+				    const form = event.target;
+				    const formData = new FormData(form);
+				    const data = {
+				      data: [
+				        formData.get("name"),
+				        formData.get("email"),
+				        formData.get("phone"),
+				        formData.get("comment"),
+				        "",//add empty strings to make the length 6.
+				        ""
+				      ]
+				    };
+				
+				    fetch("https://script.google.com/macros/s/AKfycbx76Wba8Cumec82_Lwh-NCO4t8Vhfu5IBVfojIg2y0LzAkiBZM8fMi48Zjnp6wkvhwr-g/exec", {
+				      method: "POST",
+				      headers: {
+				        "Content-Type": "application/json"
+				      },
+				      body: JSON.stringify(data)
+				    })
+				    .then(response => response.json())
+				    .then(result => {
+				      console.log(result);
+				      // Handle the response from Apps Script (e.g., display a message)
+				    })
+				    .catch(error => {
+				      console.error("Error:", error);
+				      // Handle errors (e.g., display an error message)
+				    });
+				  });
+			</script>
 		</div>
 	</section>
 
