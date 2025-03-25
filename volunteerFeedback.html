@@ -105,10 +105,10 @@
         urlEncodedData.append("phone", phone);
         urlEncodedData.append("comment", comment);
 
-        fetch("https://script.google.com/macros/s/AKfycbzVb6_Qp6PZgBHaSamSMQn2mjcEe_JwkSpAdelW2N3q8qphzDDqGasoDp9isQ_UztvQZA/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbydquicSTSv7ncI8ZFX3CTg3I0bBABoNwnFjh0f6Oyn87GHtEuKzMCNJVYQ_7H9c2fxJA/exec", {
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded" // Important!
+                "Content-Type": "application/x-www-form-urlencoded" 
             },
             body: urlEncodedData.toString()
         })
