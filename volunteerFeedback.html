@@ -48,80 +48,79 @@
 			<div class="partialBorderWrapper">
 				<p class="partialBorderDark"></p>
 			</div>
-			<form class="contactForm" id="feedbackForm" method="post" enctype="text/plain">
+			<form class="contactForm" id="feedbackForm" method="post" action="https://script.google.com/macros/s/AKfycbydquicSTSv7ncI8ZFX3CTg3I0bBABoNwnFjh0f6Oyn87GHtEuKzMCNJVYQ_7H9c2fxJA/exec" enctype="text/plain">
     <input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
     <input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
     <input type="text" name="phone" placeholder="Your Phone Number" id="phoneNumber" class="contactFormInputs">
     <input type="text" name="comment" placeholder="Your Feedback Here" id="comment" class="contactFormInputs">
     <input type="submit" value="Submit" id="contactForm">
 </form>
-
 <script>
-    document.getElementById("feedbackForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
+document.getElementById("feedbackForm").addEventListener("submit", function(event) 
+{
 
-        const form = event.target;
-        const formData = new FormData(form);
+    // Validation functions
+    function isValidEmail(email) 
+    {
 
-        // Validation functions
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        return emailRegex.test(email);
+    }
+
+    function isValidPhoneNumber(phone) 
+    {
+
+        const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        
+        return phoneRegex.test(phone);
+    }
+
+    // Sanitize function
+    function sanitize(value) 
+    {
+
+        if (typeof value === 'string') 
+        {
+
+            return value.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Basic XSS protection
         }
+        
+        return value;
+    }
 
-        function isValidPhoneNumber(phone) {
-            const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-            return phoneRegex.test(phone);
-        }
+    // Get and validate form data
+    const name = sanitize(document.getElementById("name").value);
+    
+    const email = sanitize(document.getElementById("email").value);
+    
+    const phone = sanitize(document.getElementById("phoneNumber").value);
+    
+    const comment = sanitize(document.getElementById("comment").value);
 
-        // Sanitize function
-        function sanitize(value) {
-            if (typeof value === 'string') {
-                return value.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Basic XSS protection
-            }
-            return value;
-        }
+    let errorMessage = "";
 
-        // Get and validate form data
-        const name = sanitize(formData.get("name"));
-        const email = sanitize(formData.get("email"));
-        const phone = sanitize(formData.get("phone"));
-        const comment = sanitize(formData.get("comment"));
+    if (!isValidEmail(email)) 
+    {
 
-        if (!isValidEmail(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
+        errorMessage = "Please enter a valid email address (e.g., example@domain.com).";
+    } 
+    else if (!isValidPhoneNumber(phone)) 
+    {
 
-        if (!isValidPhoneNumber(phone)) {
-            alert("Please enter a valid phone number.");
-            return;
-        }
+        errorMessage = "Please enter a valid phone number (e.g., +1 (123) 456-7890).";
+    }
 
-        // Create the URL-encoded form data
-        const urlEncodedData = new URLSearchParams();
-        urlEncodedData.append("name", name);
-        urlEncodedData.append("email", email);
-        urlEncodedData.append("phone", phone);
-        urlEncodedData.append("comment", comment);
+    if (errorMessage) 
+    {
 
-        fetch("https://script.google.com/macros/s/AKfycbydquicSTSv7ncI8ZFX3CTg3I0bBABoNwnFjh0f6Oyn87GHtEuKzMCNJVYQ_7H9c2fxJA/exec", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded" 
-            },
-            body: urlEncodedData.toString()
-        })
-        .then(response => response.json())
-        .then(result => {
-            console.log(result);
-            // Handle the response from Apps Script (e.g., display a message)
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            // Handle errors (e.g., display an error message)
-        });
-    });
+        event.preventDefault(); // Prevent form submission
+        
+        alert(errorMessage); // Use a simple alert
+        
+        return;
+    }
+});
 </script>
 		</div>
 	</section>
