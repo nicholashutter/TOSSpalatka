@@ -15,6 +15,16 @@
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
+	<script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        function getCookie(name) {
+	            const value = `; ${document.cookie}`;
+	            const parts = value.split(`; ${name}=`);
+	            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        document.getElementById('csrfToken').value = getCookie('csrfToken');
+    });
+</script>
 </head>
 
 <body class="is-preload">
@@ -48,13 +58,10 @@
 			<div class="partialBorderWrapper">
 				<p class="partialBorderDark"></p>
 			</div>
-			<form class="contactForm" id="feedbackForm" method="post" action="https://script.google.com/macros/s/AKfycbydquicSTSv7ncI8ZFX3CTg3I0bBABoNwnFjh0f6Oyn87GHtEuKzMCNJVYQ_7H9c2fxJA/exec" enctype="text/plain">
-    <input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
-    <input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
-    <input type="text" name="phone" placeholder="Your Phone Number" id="phoneNumber" class="contactFormInputs">
-    <input type="text" name="comment" placeholder="Your Feedback Here" id="comment" class="contactFormInputs">
-    <input type="submit" value="Submit" id="contactForm">
-</form>
+			<form class="contactForm" id="feedbackForm" method="post" action="YOUR_APPS_SCRIPT_URL" enctype="text/plain">
+    <input type="hidden" name="csrfToken" id="csrfToken" value="">
+    </form>
+
 <script>
 document.getElementById("feedbackForm").addEventListener("submit", function(event) 
 {
