@@ -15,6 +15,8 @@
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
+
+	</script>
 </head>
 
 <body class="is-preload">
@@ -48,15 +50,94 @@
 			<div class="partialBorderWrapper">
 				<p class="partialBorderDark"></p>
 			</div>
-			<form class="contactForm" action="" method="post" enctype="text/plain">
+			<form class="contactForm" id="feedbackForm" method="post"
+				action="https://script.google.com/macros/s/AKfycbwjNXAwV_Z2xlFKw59FEuKozTKwsVX-0X9yQcvh2d4e_1FAQnghRhGLTjlHv3FDOWU/exec"
+				enctype="application/x-www-form-urlencoded">
+
+
 				<input type="text" name="name" placeholder="Your Name" id="name" class="contactFormInputs">
+
 				<input type="email" name="email" placeholder="Your Email" id="email" class="contactFormInputs">
+
 				<input type="text" name="phone" placeholder="Your Phone Number" id="phoneNumber"
 					class="contactFormInputs">
+
 				<input type="text" name="comment" placeholder="Your Feedback Here" id="comment"
 					class="contactFormInputs">
+
+				<input type="text" name="secret" placeholder="Secret Value Here" id="secret" class="contactFormInputs">
+
 				<input type="submit" value="Submit" id="contactForm">
+
 			</form>
+
+			<script>
+				document.getElementById("feedbackForm").addEventListener("submit", function (event) 
+				{
+
+					// Validation functions
+					function isValidEmail(email) 
+					{
+
+						const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+						return emailRegex.test(email);
+					}
+
+					function isValidPhoneNumber(phone) 
+					{
+
+						const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+
+						return phoneRegex.test(phone);
+					}
+
+					// Sanitize function
+					function sanitize(value) 
+					{
+
+						if (typeof value === 'string') 
+						{
+
+							return value.replace(/</g, '&lt;').replace(/>/g, '&gt;'); // Basic XSS protection
+						}
+
+						return value;
+					}
+
+					// Get and validate form data
+					const name = sanitize(document.getElementById("name").value);
+
+					const email = sanitize(document.getElementById("email").value);
+
+					const phone = sanitize(document.getElementById("phoneNumber").value);
+
+					const comment = sanitize(document.getElementById("comment").value);
+
+					let errorMessage = "";
+
+					if (!isValidEmail(email)) 
+					{
+
+						errorMessage = "Please enter a valid email address (e.g., example@domain.com).";
+					}
+					else if (!isValidPhoneNumber(phone)) 
+					{
+
+						errorMessage = "Please enter a valid phone number (e.g., +1 (123) 456-7890).";
+					}
+
+					if (errorMessage) 
+					{
+
+						event.preventDefault(); // Prevent form submission
+
+						alert(errorMessage); // Use a simple alert
+
+						return;
+					}
+				});
+			</script>
 		</div>
 	</section>
 
